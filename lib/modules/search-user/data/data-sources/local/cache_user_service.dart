@@ -39,7 +39,7 @@ class CacheUserService {
     );
   }
 
-  Future<void> insertUser(UserModel user) async {
+  Future<void> cacheUser(UserModel user) async {
     final db = await database;
     final data = user.toJson();
     data['timestamp'] = DateTime.now().millisecondsSinceEpoch;
@@ -51,7 +51,7 @@ class CacheUserService {
     );
   }
 
-  Future<UserModel?> getUserByUsername(String username) async {
+  Future<UserModel?> getCachedUserByUsername(String username) async {
     final db = await database;
     final result = await db.query(
       'CachedUser',

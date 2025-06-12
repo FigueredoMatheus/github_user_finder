@@ -15,13 +15,13 @@ class UserRepositoryImpl implements UserInterface {
   @override
   Future<User> getUserByUsername(String username) async {
     try {
-      final cachedUser = await cacheService.getUserByUsername(username);
+      final cachedUser = await cacheService.getCachedUserByUsername(username);
 
       if (cachedUser != null) return cachedUser.toEntity();
 
       final userModel = await apiService.fetchUser(username);
 
-      await cacheService.insertUser(userModel);
+      await cacheService.cacheUser(userModel);
 
       return userModel.toEntity();
     } on DioException catch (e) {
