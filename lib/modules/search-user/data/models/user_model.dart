@@ -14,11 +14,15 @@ class UserModel {
   @JsonKey(name: 'public_repos')
   final int publicRepos;
 
+  @JsonKey(name: "avatar_url")
+  final String avatarUrl;
+
   UserModel({
     required this.login,
     required this.name,
     required this.followers,
     required this.publicRepos,
+    required this.avatarUrl,
     this.bio,
     this.location,
   });
@@ -30,6 +34,7 @@ class UserModel {
         location: location,
         followers: followers,
         publicRepos: publicRepos,
+        avatarUrl: avatarUrl,
       );
 
   factory UserModel.fromJson(Map<String, dynamic> json) =>
