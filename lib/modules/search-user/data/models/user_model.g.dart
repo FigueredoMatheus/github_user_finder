@@ -11,6 +11,7 @@ UserModel _$UserModelFromJson(Map<String, dynamic> json) => UserModel(
       name: json['name'] as String,
       followers: (json['followers'] as num).toInt(),
       publicRepos: (json['public_repos'] as num).toInt(),
+      avatarUrl: json['avatar_url'] as String,
       bio: json['bio'] as String?,
       location: json['location'] as String?,
     );
@@ -22,4 +23,5 @@ Map<String, dynamic> _$UserModelToJson(UserModel instance) => <String, dynamic>{
       'location': instance.location,
       'followers': instance.followers,
       'public_repos': instance.publicRepos,
+      'avatar_url': instance.avatarUrl,
     };

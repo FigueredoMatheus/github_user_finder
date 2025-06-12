@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:github_user_finder/core/exceptions/app_exceptions.dart';
-import 'package:github_user_finder/modules/search-user/data/data-sources/local/search_user_cache.dart';
+import 'package:github_user_finder/modules/search-user/data/data-sources/local/cache_user_service.dart';
 import 'package:github_user_finder/modules/search-user/data/data-sources/remote/github_api_service.dart';
 import 'package:github_user_finder/modules/search-user/domain/interfaces/user_interface.dart';
 
@@ -8,20 +8,20 @@ import '../../domain/entities/user.dart';
 
 class UserRepositoryImpl implements UserInterface {
   final GithubApiService apiService;
-  final UserCacheService cacheService;
+  final CacheUserService cacheService;
 
   UserRepositoryImpl(this.apiService, this.cacheService);
 
   @override
   Future<User> getUserByUsername(String username) async {
     try {
-      final cached = await cacheService.getCachedUser(username);
+      final cachedUser = await cacheService.getUserByUsername(username);
 
-      if (cached != null) return cached.toEntity();
+      if (cachedUser != null) return cachedUser.toEntity();
 
       final userModel = await apiService.fetchUser(username);
 
-      await cacheService.cacheUser(userModel);
+      await cacheService.insertUser(userModel);
 
       return userModel.toEntity();
     } on DioException catch (e) {
