@@ -22,24 +22,32 @@ class SearchByWidget extends StatelessWidget {
           },
         );
       },
-      child: ListTile(
-        title: Text(
-          'Buscar por',
-          style: TextStyle(
-            fontWeight: hasSearchByType ? FontWeight.w400 : FontWeight.bold,
-            fontSize: hasSearchByType ? 14 : 16,
+      child: Container(
+        decoration: BoxDecoration(
+          border: Border(
+            bottom: BorderSide(color: Colors.grey.shade300, width: 1),
           ),
         ),
-        subtitle: hasSearchByType
-            ? Text(
-                searchByType!.searchByLabel,
-                style: TextStyle(
-                  fontWeight: FontWeight.w500,
-                  fontSize: 16,
-                ),
-              )
-            : null,
-        trailing: Icon(Icons.arrow_forward_rounded),
+        child: ListTile(
+          contentPadding: EdgeInsets.zero,
+          title: Text(
+            'Buscar por',
+            style: TextStyle(
+              fontWeight: hasSearchByType ? FontWeight.w400 : FontWeight.bold,
+              fontSize: hasSearchByType ? 14 : 16,
+            ),
+          ),
+          subtitle: hasSearchByType
+              ? Text(
+                  searchByType!.searchByLabel,
+                  style: TextStyle(
+                    fontWeight: FontWeight.w500,
+                    fontSize: 16,
+                  ),
+                )
+              : null,
+          trailing: Icon(Icons.arrow_forward_rounded),
+        ),
       ),
     );
   }
