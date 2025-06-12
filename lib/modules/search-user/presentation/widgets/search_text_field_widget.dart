@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:github_user_finder/modules/search-user/presentation/bloc/search_user_bloc.dart';
 import 'package:github_user_finder/modules/search-user/presentation/utils/enums/search_filter_type.dart';
 import 'package:github_user_finder/modules/search-user/presentation/widgets/custom_text_field_widget.dart';
 
@@ -33,6 +35,7 @@ class _SearchTextFieldWidgetState extends State<SearchTextFieldWidget> {
               controller: searchField1Controller,
               hintText: hintText,
               keyboardType: keyboardType,
+              onSubmitted: onSubmitted,
             ),
           ),
           Visibility(
@@ -77,6 +80,12 @@ class _SearchTextFieldWidgetState extends State<SearchTextFieldWidget> {
         return TextInputType.number;
       case SearchByType.none:
         return TextInputType.none;
+    }
+  }
+
+  void onSubmitted(String? value) {
+    if (value != null) {
+      context.read<SearchUserBloc>().add(SearchSubmitted(value));
     }
   }
 }

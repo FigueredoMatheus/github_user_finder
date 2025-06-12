@@ -10,7 +10,7 @@ sealed class SearchUserState extends Equatable {
 final class SearchUserInitial extends SearchUserState {
   final SearchByType searchByType;
 
-  const SearchUserInitial({this.searchByType = SearchByType.none});
+  const SearchUserInitial({this.searchByType = SearchByType.username});
 
   @override
   List<Object> get props => [searchByType];
@@ -33,3 +33,5 @@ final class SearchError extends SearchUserState {
   @override
   List<Object> get props => [message];
 }
+
+class SearchLoading extends SearchUserState {}

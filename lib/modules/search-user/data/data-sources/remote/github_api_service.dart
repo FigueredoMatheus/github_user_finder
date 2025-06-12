@@ -8,6 +8,6 @@ part 'github_api_service.g.dart';
 abstract class GithubApiService {
   factory GithubApiService(Dio dio, {String baseUrl}) = _GithubApiService;
 
-  @GET("/users/{username}")
+  @GET("users/{username}")
   Future<UserModel> fetchUser(@Path("username") String username);
 }

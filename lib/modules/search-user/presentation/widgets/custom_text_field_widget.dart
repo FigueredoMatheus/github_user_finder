@@ -18,18 +18,16 @@ class CustomTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
-      controller: controller,
-      keyboardType: keyboardType,
-      onChanged: onChanged,
-      onSubmitted: onSubmitted,
-      decoration: InputDecoration(
-        hintText: hintText,
-        suffix: Icon(Icons.search_rounded),
-        contentPadding:
-            const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(16),
+    return SizedBox(
+      height: 50,
+      child: TextField(
+        controller: controller,
+        keyboardType: keyboardType,
+        onChanged: onChanged,
+        onSubmitted: onSubmitted,
+        decoration: InputDecoration(
+          hintText: hintText,
+          border: OutlineInputBorder(borderRadius: BorderRadius.circular(16)),
         ),
       ),
     );

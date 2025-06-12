@@ -25,7 +25,7 @@ class CacheUserService {
       onCreate: (db, version) {
         return db.execute('''
           CREATE TABLE CachedUser (
-            username TEXT PRIMARY KEY,
+            login TEXT PRIMARY KEY,
             name TEXT,
             bio TEXT,
             location TEXT,
@@ -41,7 +41,9 @@ class CacheUserService {
 
   Future<void> cacheUser(UserModel user) async {
     final db = await database;
+
     final data = user.toJson();
+
     data['timestamp'] = DateTime.now().millisecondsSinceEpoch;
 
     await db.insert(
@@ -55,7 +57,7 @@ class CacheUserService {
     final db = await database;
     final result = await db.query(
       'CachedUser',
-      where: 'username = ?',
+      where: 'login = ?',
       whereArgs: [username],
     );
 
