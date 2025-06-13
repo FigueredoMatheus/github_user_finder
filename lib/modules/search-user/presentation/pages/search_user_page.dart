@@ -13,71 +13,59 @@ class SearchUserPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      extendBody: false,
-      resizeToAvoidBottomInset: false,
-      appBar: AppBar(
-        backgroundColor: Colors.deepPurple,
-        title: Text('Buscador de Usuários do GitHub'),
-        titleTextStyle: const TextStyle(
-          color: Colors.white,
-          fontSize: 16,
-        ),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 15),
-        child: Column(
-          children: [
-            BlocBuilder<SearchUserBloc, SearchUserState>(
-                builder: (context, state) {
-              final searchByType = state is SearchUserInitial
-                  ? state.searchByType
-                  : context.read<SearchUserBloc>().currentSearchByType;
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 15),
+      child: Column(
+        children: [
+          BlocBuilder<SearchUserBloc, SearchUserState>(
+              builder: (context, state) {
+            final searchByType = state is SearchUserInitial
+                ? state.searchByType
+                : context.read<SearchUserBloc>().currentSearchByType;
 
-              return Column(
-                children: [
-                  SearchByWidget(searchByType: searchByType),
-                  SearchTextFieldWidget(searchByType: searchByType),
-                ],
-              );
-            }),
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.only(top: 15),
-                child: BlocBuilder<SearchUserBloc, SearchUserState>(
-                    builder: (context, state) {
-                  if (state is SearchUserFound) {
-                    return LoadedUserBody(user: state.user);
-                  }
+            return Column(
+              children: [
+                SearchByWidget(searchByType: searchByType),
+                SearchTextFieldWidget(searchByType: searchByType),
+              ],
+            );
+          }),
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.only(top: 15),
+              child: BlocBuilder<SearchUserBloc, SearchUserState>(
+                  builder: (context, state) {
+                if (state is SearchUserFound) {
+                  return LoadedUserBody(user: state.user);
+                }
 
-                  if (state is SearchLoading) {
-                    return LoadingStateBody();
-                  }
+                if (state is SearchLoading) {
+                  return LoadingStateBody();
+                }
 
-                  if (state is SearchError) {
-                    return SearchErroBody(message: state.message);
-                  }
+                if (state is SearchError) {
+                  return SearchErroBody(message: state.message);
+                }
 
-                  if (state is SearchRecentUsersLoaded) {
-                    return LoadedUsersListBody(
-                      users: state.users,
-                      infoText: '* Buscas recentes...',
-                    );
-                  }
+                if (state is SearchRecentUsersLoaded) {
+                  return LoadedUsersListBody(
+                    users: state.users,
+                    infoText: '* Buscas recentes...',
+                  );
+                }
 
-                  if (state is SearchSuggestionsLoaded) {
-                    return LoadedUsersListBody(
-                      users: state.suggestions,
-                      infoText: '* Sugestões...',
-                    );
-                  }
+                if (state is SearchSuggestionsLoaded) {
+                  return LoadedUsersListBody(
+                    users: state.suggestions,
+                    infoText: '* Sugestões...',
+                  );
+                }
 
-                  return Container();
-                }),
-              ),
+                return Container();
+              }),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
