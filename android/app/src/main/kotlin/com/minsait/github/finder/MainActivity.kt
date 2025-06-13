@@ -1,4 +1,4 @@
-package com.example.github_user_finder
+package com.minsait.github.finder
 
 import io.flutter.embedding.android.FlutterActivity
 
