@@ -10,9 +10,16 @@ class UserDetailsHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        CircleAvatar(
-          backgroundImage: NetworkImage(user.avatarUrl),
-          maxRadius: 45,
+        Container(
+          width: 90,
+          height: 90,
+          decoration: BoxDecoration(
+            border: Border.all(color: Colors.grey),
+            shape: BoxShape.circle,
+            image: DecorationImage(
+              image: NetworkImage(user.avatarUrl),
+            ),
+          ),
         ),
         Padding(
           padding: const EdgeInsets.only(left: 15.0),

@@ -27,20 +27,30 @@ class CustomLoadedUserCard extends StatelessWidget {
           padding: const EdgeInsets.all(10),
           child: Row(
             children: [
-              CircleAvatar(
-                backgroundImage: NetworkImage(user.avatarUrl),
-                maxRadius: 30,
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 10.0),
-                child: Text(
-                  user.login,
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.w500,
+              Container(
+                width: 60,
+                height: 60,
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.grey),
+                  shape: BoxShape.circle,
+                  image: DecorationImage(
+                    image: NetworkImage(user.avatarUrl),
                   ),
                 ),
-              )
+              ),
+              const SizedBox(width: 10),
+              Expanded(
+                child: Text(
+                  user.login,
+                  softWrap: true,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  style: const TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+              ),
             ],
           ),
         ),
