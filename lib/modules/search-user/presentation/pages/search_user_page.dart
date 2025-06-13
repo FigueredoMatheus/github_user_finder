@@ -5,7 +5,7 @@ import 'package:github_user_finder/modules/search-user/presentation/widgets/load
 import 'package:github_user_finder/modules/search-user/presentation/widgets/loaded_users_list_body.dart';
 import 'package:github_user_finder/modules/search-user/presentation/widgets/search_by_widget.dart';
 import 'package:github_user_finder/modules/search-user/presentation/widgets/search_erro_body.dart';
-import 'package:github_user_finder/modules/search-user/presentation/widgets/search_loading_body.dart';
+import 'package:github_user_finder/core/widgets/loading_state_body.dart';
 import 'package:github_user_finder/modules/search-user/presentation/widgets/search_text_field_widget.dart';
 
 class SearchUserPage extends StatelessWidget {
@@ -51,7 +51,7 @@ class SearchUserPage extends StatelessWidget {
                   }
 
                   if (state is SearchLoading) {
-                    return SearchLoadingBody();
+                    return LoadingStateBody();
                   }
 
                   if (state is SearchError) {

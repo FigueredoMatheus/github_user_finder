@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:github_user_finder/modules/search-user/domain/entities/user.dart';
-import 'package:github_user_finder/modules/search-user/presentation/widgets/custom_loaded_user_card.dart';
+import 'package:github_user_finder/core/widgets/custom_loaded_user_card.dart';
 
 class LoadedUserBody extends StatelessWidget {
   final User user;
