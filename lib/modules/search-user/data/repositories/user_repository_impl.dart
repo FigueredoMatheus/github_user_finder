@@ -39,4 +39,12 @@ class UserRepositoryImpl implements UserInterface {
       throw UnexpectedException();
     }
   }
+
+  @override
+  Future<List<User>> getUsersPaginated({int limit = 10, int offset = 0}) async {
+    final result =
+        await cacheService.getUsersPaginated(limit: limit, offset: offset);
+
+    return result.map((e) => e.toEntity()).toList();
+  }
 }

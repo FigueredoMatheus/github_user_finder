@@ -89,4 +89,17 @@ class CacheUserService {
 
     return maps.map((map) => UserModel.fromJson(map)).toList();
   }
+
+  Future<List<UserModel>> getUsersPaginated(
+      {int limit = 10, int offset = 0}) async {
+    final db = await database;
+
+    final result = await db.query(
+      "CachedUser",
+      orderBy: 'rowid DESC',
+      limit: limit,
+      offset: offset,
+    );
+    return result.map((e) => UserModel.fromJson(e)).toList();
+  }
 }
