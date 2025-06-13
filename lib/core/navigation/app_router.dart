@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:github_user_finder/core/navigation/app_routes_names.dart';
-import 'package:github_user_finder/modules/search-user/domain/entities/user.dart';
-import 'package:github_user_finder/modules/search-user/presentation/pages/user_details_page.dart';
+import 'package:github_user_finder/modules/search-user/data/models/user_model.dart';
+import 'package:github_user_finder/modules/user-details/presentation/pages/user_details_page.dart';
 import '../../modules/home/pages/home_page.dart';
 
 class AppRouter {
@@ -11,9 +11,22 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => const HomePage());
 
       case AppRoutesNames.USER_DETAILS:
-        final user = settings.arguments as User;
+        //final user = settings.arguments as User;
 
-        return MaterialPageRoute(builder: (_) => UserDetailsPage(user: user));
+        final userModel = UserModel.fromJson({
+          "login": "octocat",
+          "name": "The Octocat",
+          "bio": "GitHub mascot",
+          "location": "San Francisco",
+          "followers": 100,
+          "public_repos": 8,
+          "avatar_url": "https://avatars.githubusercontent.com/u/583231?v=4",
+        });
+
+        final userEntity = userModel.toEntity();
+
+        return MaterialPageRoute(
+            builder: (_) => UserDetailsPage(user: userEntity));
 
       default:
         return MaterialPageRoute(
