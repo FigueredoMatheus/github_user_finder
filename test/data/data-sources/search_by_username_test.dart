@@ -30,7 +30,7 @@ void main() {
 
   final userEntity = userModel.toEntity();
 
-  setUp(() {
+  setUp(() async {
     mockApi = MockGithubApiService();
     mockCache = MockCacheUserService();
     repository = UserRepositoryImpl(mockApi, mockCache);

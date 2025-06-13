@@ -36,7 +36,7 @@ class _GithubApiService implements GithubApiService {
     )
         .compose(
           _dio.options,
-          '/users/${username}',
+          'users/${username}',
           queryParameters: queryParameters,
           data: _data,
         )

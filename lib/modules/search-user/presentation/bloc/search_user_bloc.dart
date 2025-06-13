@@ -39,5 +39,11 @@ class SearchUserBloc extends Bloc<SearchUserEvent, SearchUserState> {
         emit(SearchError(e.message));
       }
     });
+
+    on<SearchRecentRequested>((event, emit) async {
+      final recent = await cacheUserService.getLastUsers(limit: 5);
+
+      emit(SearchRecentUsersLoaded(recent.map((e) => e.toEntity()).toList()));
+    });
   }
 }

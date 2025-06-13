@@ -66,4 +66,14 @@ class CacheUserService {
     }
     return null;
   }
+
+  Future<List<UserModel>> getLastUsers({int limit = 5}) async {
+    final db = await database;
+    final result = await db.query(
+      'CachedUser',
+      orderBy: 'rowid DESC',
+      limit: limit,
+    );
+    return result.map((e) => UserModel.fromJson(e)).toList();
+  }
 }

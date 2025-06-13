@@ -24,3 +24,5 @@ final class SearchSubmitted extends SearchUserEvent {
   @override
   List<Object> get props => [query];
 }
+
+class SearchRecentRequested extends SearchUserEvent {}

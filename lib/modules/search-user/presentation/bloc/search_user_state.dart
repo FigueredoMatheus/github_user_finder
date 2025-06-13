@@ -25,6 +25,14 @@ final class SearchUserFound extends SearchUserState {
   List<Object> get props => [user];
 }
 
+class SearchRecentUsersLoaded extends SearchUserState {
+  final List<User> users;
+  const SearchRecentUsersLoaded(this.users);
+
+  @override
+  List<Object> get props => [users];
+}
+
 final class SearchError extends SearchUserState {
   final String message;
 

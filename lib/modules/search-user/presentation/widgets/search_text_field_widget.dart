@@ -25,6 +25,9 @@ class _SearchTextFieldWidgetState extends State<SearchTextFieldWidget> {
     final isLocationSearch = widget.searchByType == SearchByType.location;
 
     final hasSearchByType = widget.searchByType != SearchByType.none;
+
+    final isSearchByUsername = widget.searchByType == SearchByType.username;
+
     return Padding(
       padding: const EdgeInsets.only(top: 15.0),
       child: Column(
@@ -36,6 +39,7 @@ class _SearchTextFieldWidgetState extends State<SearchTextFieldWidget> {
               hintText: hintText,
               keyboardType: keyboardType,
               onSubmitted: onSubmitted,
+              onTap: isSearchByUsername ? onTap : null,
             ),
           ),
           Visibility(
@@ -87,5 +91,9 @@ class _SearchTextFieldWidgetState extends State<SearchTextFieldWidget> {
     if (value != null) {
       context.read<SearchUserBloc>().add(SearchSubmitted(value));
     }
+  }
+
+  void onTap() {
+    context.read<SearchUserBloc>().add(SearchRecentRequested());
   }
 }
