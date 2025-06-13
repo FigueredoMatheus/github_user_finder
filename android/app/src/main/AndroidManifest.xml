@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <application
-        android:label="github_user_finder"
+        android:label="GitHub Finder"
         android:name="${applicationName}"
         android:icon="@mipmap/launcher_icon">
         <activity
