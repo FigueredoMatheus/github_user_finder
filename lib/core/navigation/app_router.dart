@@ -1,6 +1,12 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:github_user_finder/core/navigation/app_routes_names.dart';
-import 'package:github_user_finder/modules/search-user/data/models/user_model.dart';
+import 'package:github_user_finder/modules/search-user/domain/entities/user.dart';
+import 'package:github_user_finder/modules/user-details/data/data-sources/remote/github_repo_api_service.dart';
+import 'package:github_user_finder/modules/user-details/data/repositories/github_repo_impl.dart';
+import 'package:github_user_finder/modules/user-details/domain/user-cases/get_last_five_user_repos.dart';
+import 'package:github_user_finder/modules/user-details/presentation/bloc/user_details_bloc.dart';
 import 'package:github_user_finder/modules/user-details/presentation/pages/user_details_page.dart';
 import '../../modules/home/pages/home_page.dart';
 
@@ -11,22 +17,17 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => const HomePage());
 
       case AppRoutesNames.USER_DETAILS:
-        //final user = settings.arguments as User;
-
-        final userModel = UserModel.fromJson({
-          "login": "octocat",
-          "name": "The Octocat",
-          "bio": "GitHub mascot",
-          "location": "San Francisco",
-          "followers": 100,
-          "public_repos": 8,
-          "avatar_url": "https://avatars.githubusercontent.com/u/583231?v=4",
-        });
-
-        final userEntity = userModel.toEntity();
+        final user = settings.arguments as User;
 
         return MaterialPageRoute(
-            builder: (_) => UserDetailsPage(user: userEntity));
+          builder: (_) => BlocProvider(
+              create: (_) => UserDetailsBloc(
+                    GetLastFiveUserRepos(
+                      GithubRepoImpl(GithubRepoApiService(Dio())),
+                    ),
+                  )..add(LoadUserCommitsEvent(user)),
+              child: UserDetailsPage(user: user)),
+        );
 
       default:
         return MaterialPageRoute(
