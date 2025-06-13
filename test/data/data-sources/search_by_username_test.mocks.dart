@@ -119,4 +119,32 @@ class MockCacheUserService extends _i1.Mock implements _i6.CacheUserService {
         ),
         returnValue: _i5.Future<List<_i2.UserModel>>.value(<_i2.UserModel>[]),
       ) as _i5.Future<List<_i2.UserModel>>);
+
+  @override
+  _i5.Future<List<_i2.UserModel>> searchUsersByPartialUsername(
+          String? partial) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #searchUsersByPartialUsername,
+          [partial],
+        ),
+        returnValue: _i5.Future<List<_i2.UserModel>>.value(<_i2.UserModel>[]),
+      ) as _i5.Future<List<_i2.UserModel>>);
+
+  @override
+  _i5.Future<List<_i2.UserModel>> getUsersPaginated({
+    int? limit = 10,
+    int? offset = 0,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getUsersPaginated,
+          [],
+          {
+            #limit: limit,
+            #offset: offset,
+          },
+        ),
+        returnValue: _i5.Future<List<_i2.UserModel>>.value(<_i2.UserModel>[]),
+      ) as _i5.Future<List<_i2.UserModel>>);
 }
