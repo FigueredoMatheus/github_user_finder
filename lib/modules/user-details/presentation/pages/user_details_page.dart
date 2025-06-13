@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:github_user_finder/modules/search-user/domain/entities/user.dart';
 import 'package:github_user_finder/modules/user-details/presentation/widgets/followers_repos_widget.dart';
 import 'package:github_user_finder/modules/user-details/presentation/widgets/header.dart';
+import 'package:github_user_finder/modules/user-details/presentation/widgets/user_bio.dart';
 
 class UserDetailsPage extends StatelessWidget {
   final User user;
@@ -20,6 +21,7 @@ class UserDetailsPage extends StatelessWidget {
           children: [
             UserDetailsHeader(user: user),
             UserDetailsFollowersAndRepos(user: user),
+            UserDetailsBio(user: user),
           ],
         ),
       ),
