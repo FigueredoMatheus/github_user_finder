@@ -12,12 +12,12 @@ class UserDetailsBio extends StatelessWidget {
       visible: user.bio != null,
       replacement: Container(),
       child: Padding(
-        padding: const EdgeInsets.only(top: 20.0, bottom: 20),
+        padding: const EdgeInsets.only(top: 20.0),
         child: Row(
           children: [
             Expanded(
               child: Text(
-                user.bio!,
+                user.bio ?? '',
                 textAlign: TextAlign.left,
                 style: const TextStyle(fontSize: 16),
               ),

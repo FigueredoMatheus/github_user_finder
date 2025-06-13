@@ -32,6 +32,7 @@ class UserDetailsHeader extends StatelessWidget {
               ),
               Visibility(
                 visible: user.location != null,
+                replacement: Container(),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
@@ -41,10 +42,10 @@ class UserDetailsHeader extends StatelessWidget {
                       size: 16,
                     ),
                     Text(
-                      user.location!,
+                      user.location ?? '',
                       style:
                           const TextStyle(fontSize: 14, color: Colors.black54),
-                    )
+                    ),
                   ],
                 ),
               ),

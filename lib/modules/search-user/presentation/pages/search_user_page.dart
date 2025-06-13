@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:github_user_finder/core/navigation/app_routes_names.dart';
 import 'package:github_user_finder/modules/search-user/presentation/bloc/search_user_bloc.dart';
 import 'package:github_user_finder/modules/search-user/presentation/widgets/loaded_user_body.dart';
 import 'package:github_user_finder/modules/search-user/presentation/widgets/loaded_users_list_body.dart';
@@ -33,36 +34,48 @@ class SearchUserPage extends StatelessWidget {
           Expanded(
             child: Padding(
               padding: const EdgeInsets.only(top: 15),
-              child: BlocBuilder<SearchUserBloc, SearchUserState>(
+              child: BlocListener<SearchUserBloc, SearchUserState>(
+                listener: (context, state) {
+                  if (state is SearchUserFound) {
+                    Navigator.pushNamed(
+                      context,
+                      AppRoutesNames.USER_DETAILS,
+                      arguments: state.user,
+                    );
+                  }
+                },
+                child: BlocBuilder<SearchUserBloc, SearchUserState>(
                   builder: (context, state) {
-                if (state is SearchUserFound) {
-                  return LoadedUserBody(user: state.user);
-                }
+                    if (state is SearchUserFound) {
+                      return LoadedUserBody(user: state.user);
+                    }
 
-                if (state is SearchLoading) {
-                  return LoadingStateBody();
-                }
+                    if (state is SearchLoading) {
+                      return LoadingStateBody();
+                    }
 
-                if (state is SearchError) {
-                  return SearchErroBody(message: state.message);
-                }
+                    if (state is SearchError) {
+                      return SearchErroBody(message: state.message);
+                    }
 
-                if (state is SearchRecentUsersLoaded) {
-                  return LoadedUsersListBody(
-                    users: state.users,
-                    infoText: '* Buscas recentes...',
-                  );
-                }
+                    if (state is SearchRecentUsersLoaded) {
+                      return LoadedUsersListBody(
+                        users: state.users,
+                        infoText: '* Buscas recentes...',
+                      );
+                    }
 
-                if (state is SearchSuggestionsLoaded) {
-                  return LoadedUsersListBody(
-                    users: state.suggestions,
-                    infoText: '* Sugestões...',
-                  );
-                }
+                    if (state is SearchSuggestionsLoaded) {
+                      return LoadedUsersListBody(
+                        users: state.suggestions,
+                        infoText: '* Sugestões...',
+                      );
+                    }
 
-                return Container();
-              }),
+                    return Container();
+                  },
+                ),
+              ),
             ),
           ),
         ],
