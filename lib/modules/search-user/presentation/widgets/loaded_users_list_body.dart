@@ -4,8 +4,9 @@ import 'package:github_user_finder/modules/search-user/presentation/widgets/cust
 
 class LoadedUsersListBody extends StatelessWidget {
   final List<User> users;
-
-  const LoadedUsersListBody({super.key, required this.users});
+  final String infoText;
+  const LoadedUsersListBody(
+      {super.key, required this.users, required this.infoText});
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +20,7 @@ class LoadedUsersListBody extends StatelessWidget {
 
         if (isFirstItem) {
           return Text(
-            '* Buscas recentes...',
+            infoText,
             style: TextStyle(fontSize: 12),
           );
         } else {

@@ -59,7 +59,17 @@ class SearchUserPage extends StatelessWidget {
                   }
 
                   if (state is SearchRecentUsersLoaded) {
-                    return LoadedUsersListBody(users: state.users);
+                    return LoadedUsersListBody(
+                      users: state.users,
+                      infoText: '* Buscas recentes...',
+                    );
+                  }
+
+                  if (state is SearchSuggestionsLoaded) {
+                    return LoadedUsersListBody(
+                      users: state.suggestions,
+                      infoText: '* Sugestões...',
+                    );
                   }
 
                   return Container();

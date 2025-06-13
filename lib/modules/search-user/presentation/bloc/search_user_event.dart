@@ -25,4 +25,13 @@ final class SearchSubmitted extends SearchUserEvent {
   List<Object> get props => [query];
 }
 
+final class SearchOnChanged extends SearchUserEvent {
+  final String query;
+
+  const SearchOnChanged(this.query);
+
+  @override
+  List<Object> get props => [query];
+}
+
 class SearchRecentRequested extends SearchUserEvent {}

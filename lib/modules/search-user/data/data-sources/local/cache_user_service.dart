@@ -76,4 +76,17 @@ class CacheUserService {
     );
     return result.map((e) => UserModel.fromJson(e)).toList();
   }
+
+  Future<List<UserModel>> searchUsersByPartialUsername(String partial) async {
+    final db = await database;
+    final maps = await db.query(
+      'CachedUser',
+      where: 'login LIKE ?',
+      whereArgs: ['%$partial%'],
+      orderBy: 'rowid DESC',
+      limit: 10,
+    );
+
+    return maps.map((map) => UserModel.fromJson(map)).toList();
+  }
 }

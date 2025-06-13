@@ -33,6 +33,14 @@ class SearchRecentUsersLoaded extends SearchUserState {
   List<Object> get props => [users];
 }
 
+class SearchSuggestionsLoaded extends SearchUserState {
+  final List<User> suggestions;
+  const SearchSuggestionsLoaded(this.suggestions);
+
+  @override
+  List<Object> get props => [suggestions];
+}
+
 final class SearchError extends SearchUserState {
   final String message;
 

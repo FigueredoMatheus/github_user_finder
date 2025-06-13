@@ -39,6 +39,7 @@ class _SearchTextFieldWidgetState extends State<SearchTextFieldWidget> {
               hintText: hintText,
               keyboardType: keyboardType,
               onSubmitted: onSubmitted,
+              onChanged: isSearchByUsername ? onChanged : null,
               onTap: isSearchByUsername ? onTap : null,
             ),
           ),
@@ -90,6 +91,12 @@ class _SearchTextFieldWidgetState extends State<SearchTextFieldWidget> {
   void onSubmitted(String? value) {
     if (value != null) {
       context.read<SearchUserBloc>().add(SearchSubmitted(value));
+    }
+  }
+
+  void onChanged(String? value) {
+    if (value != null) {
+      context.read<SearchUserBloc>().add(SearchOnChanged(value));
     }
   }
 

@@ -31,8 +31,10 @@ class SearchUserBloc extends Bloc<SearchUserEvent, SearchUserState> {
     on<SearchSubmitted>((event, emit) async {
       emit(SearchLoading());
 
+      final query = event.query.trim();
+
       try {
-        final user = await getUserByUsername(event.query);
+        final user = await getUserByUsername(query);
 
         emit(SearchUserFound(user));
       } on AppException catch (e) {
@@ -44,6 +46,20 @@ class SearchUserBloc extends Bloc<SearchUserEvent, SearchUserState> {
       final recent = await cacheUserService.getLastUsers(limit: 5);
 
       emit(SearchRecentUsersLoaded(recent.map((e) => e.toEntity()).toList()));
+    });
+
+    on<SearchOnChanged>((event, emit) async {
+      final query = event.query.trim();
+
+      if (query.length >= 2) {
+        final suggestions =
+            await cacheUserService.searchUsersByPartialUsername(query);
+
+        emit(SearchSuggestionsLoaded(
+            suggestions.map((e) => e.toEntity()).toList()));
+      } else {
+        add(SearchRecentRequested());
+      }
     });
   }
 }
